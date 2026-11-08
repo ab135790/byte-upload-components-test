@@ -1,0 +1,24 @@
+import { defineConfig } from 'vitest/config';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+
+export default defineConfig({
+    plugins: [vue()],
+    resolve: {
+        alias: {
+            '@': resolve(import.meta.dirname, 'src')
+        }
+    },
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+        include: [
+            'src/**/*.{test,spec}.{ts,tsx,js,jsx}',
+            'tests/**/*.{test,spec}.{ts,tsx,js,jsx}'
+        ],
+        exclude: ['node_modules', 'lib', 'dist'],
+        coverage: {
+            provider: 'v8'
+        }
+    }
+})
